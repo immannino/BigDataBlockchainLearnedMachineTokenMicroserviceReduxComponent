@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Welcome to Customer Information</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<div>
+    <h1> TaxToken Coding Packet</h1>
+    <div class="gradient gradient-primary"></div>
+    <div class="gradient gradient-secondary"></div>
+    <div class="container">
+        <table>
+            <thead>API Endpoints</thead>
+            <tr>
+                <td>Action</td>
+                <td>Endpoint</td>
+                <td>Description</td>
+            </tr>
+            <tr>
+                <td>Current page</td>
+                <td>GET /</td>
+                <td>Gets the home index.html page</td>
+            </tr>
+            <tr>
+                <td><a href="/tony/birthday">/tony/birthday</td>
+                <td>GET /{name}/birthday</td>
+                <td>Returns the user's birthday.</td>
+            </tr>
+            <tr>
+                <td><a href="/tony/age">/tony/age</td>
+                <td>GET /{name}/age</td>
+                <td>Returns the user's age</td>
+            </tr>
+            <tr>
+                <td>TODO</td>
+                <td>POST /user</td>
+                <td>Adds a new user. <br>
+                Request Body: <br>
+                    <code>
+                        {
+                            "name":"String",
+                            "birthday":"String",
+                            "age":Integer
+                        }
+                    </code><br>
+                    Returns HttpStatus or ResponseEntity object
+                </td>
+            </tr>
+            <tr>
+                <td>TODO</td>
+                <td>PUT /user</td>
+                <td>Updates information for a given user.<br>
+                    Request Body: <br>
+                    <code>
+                        {
+                            "birthday":"String",
+                            "age":Integer
+                        }
+                    </code><br>
+                    Returns HttpStatus or ResponseEntity object
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
