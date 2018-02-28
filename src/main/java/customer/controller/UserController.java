@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Map;
+
 @Controller
 public class UserController {
 
@@ -15,27 +18,30 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/{name}/birthday")
     @ResponseBody
-    public String getUserBirthday(@PathVariable String name) {
-        return userService.getUser(name).getBirthday();
+    public Map getUserBirthday(@PathVariable String name) {
+        return Collections.singletonMap("birthday", userService.getUser(name).getBirthday());
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{name}/age")
     @ResponseBody
-    public int getUserAge(@PathVariable String name) {
-        return userService.getUser(name).getAge();
+    public Map getUserAge(@PathVariable String name) {
+        return Collections.singletonMap("age", userService.getUser(name).getAge());
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/user")
     @ResponseBody
-    public HttpStatus createUser(@RequestBody User user) {
-        User tempUser = userService.createUser(user);
-        return HttpStatus.CREATED;
+    public HttpStatus postCreateUser(@RequestBody User user) {
+        User newUser = userService.createUser(user);
+        HttpStatus returnStatus = (newUser != null ? HttpStatus.CREATED : HttpStatus.INTERNAL_SERVER_ERROR);
+        return returnStatus;
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/user/{name}")
     @ResponseBody
-    public HttpStatus updateUser(@PathVariable String name, @RequestBody User user) {
+    public HttpStatus putUpdateUser(@PathVariable String name, @RequestBody User user) {
         User tempUser = new User(name, user.getBirthday(), user.getAge());
-        return HttpStatus.ACCEPTED;
+        User updatedUser = userService.updateUser(tempUser);
+        HttpStatus returnStatus = (updatedUser != null ? HttpStatus.ACCEPTED : HttpStatus.INTERNAL_SERVER_ERROR);
+        return returnStatus;
     }
 }
