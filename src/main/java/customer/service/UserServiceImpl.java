@@ -1,22 +1,27 @@
 package customer.service;
 
+import customer.data.UserRepository;
 import customer.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserServiceImpl implements UserService {
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public User createUser(User user) {
-        return user;
+        return this.userRepository.save(user);
     }
 
     @Override
     public User getUser(String name) {
-        return new User(name, "December 6th, 1993", 24);
+        return this.userRepository.findUserByName(name);
     }
 
     @Override
     public User updateUser(User user) {
-        return new User(user.getName(), user.getBirthday(), user.getAge());
+        return this.userRepository.save(user);
     }
 }

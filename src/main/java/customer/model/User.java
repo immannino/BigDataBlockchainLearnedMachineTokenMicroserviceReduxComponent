@@ -1,7 +1,16 @@
 package customer.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long id;
     private String name;
     private String birthday;
     private int age;
@@ -26,5 +35,20 @@ public class User {
 
     public int getAge() {
         return this.age;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "User[id=%d, Name='%s', Birthday='%s', Age='%d']",
+                0, name, birthday.toString(), age);
     }
 }
